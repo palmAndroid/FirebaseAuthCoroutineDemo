@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FirebaseAuthCoroutineDemo</string>
+    <string name="create_account">Create Account</string>
+    <string name="login">Login</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_confirm_password">Enter Confirm Password</string>
+</resources>
