@@ -1,8 +1,8 @@
-package com.firebasecoroutinedemo.preference
+package com.loginsample.preference
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.firebasecoroutinedemo.constants.ApplicationConstants
+import com.loginsample.constants.ApplicationConstants
 
 class PreferenceStore(context: Context) {
    private var context : Context = context

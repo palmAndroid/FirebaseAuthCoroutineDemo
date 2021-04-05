@@ -1,4 +1,4 @@
-package com.firebasecoroutinedemo
+package com.loginsample
 
 import org.junit.Test
 

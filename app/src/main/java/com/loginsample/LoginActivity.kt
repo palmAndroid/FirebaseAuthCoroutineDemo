@@ -1,4 +1,4 @@
-package com.firebasecoroutinedemo
+package com.loginsample
 
 import android.content.Context
 import android.content.Intent
@@ -10,11 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.firebasecoroutinedemo.constants.ApplicationConstants
-import com.firebasecoroutinedemo.entity.UserRequest
-import com.firebasecoroutinedemo.preference.PreferenceStore
-import com.firebasecoroutinedemo.viewmodel.CreateAccountViewModel
-import com.firebasecoroutinedemo.viewmodel.LoginViewModel
+import com.loginsample.constants.ApplicationConstants
+import com.loginsample.entity.UserRequest
+import com.loginsample.preference.PreferenceStore
+import com.loginsample.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.login.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener{
@@ -46,15 +45,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
         }else if (!isValidEmail(email)){
             showToast("Email id is not valid!")
         }else{
+            progressBar.visibility = View.VISIBLE
             viewModel.proceedWithLogin(this, UserRequest( email, password))
         }
         viewModel.userList.observe(this, Observer { it->
             if (it.isError){
+                progressBar.visibility = View.GONE
                 showToast("Something went wrong , Please try again later!")
             }else{
-                /* var bundle = bundleOf("email" to it.email ,
-                     "name" to it.name,
-                     "uid" to it.uid)*/
+                progressBar.visibility = View.GONE
                 var preferences = PreferenceStore(this as Context)
                 preferences.saveValue(ApplicationConstants.UID,it.uid)
                 preferences.saveValue(ApplicationConstants.USERNAME,it.name)

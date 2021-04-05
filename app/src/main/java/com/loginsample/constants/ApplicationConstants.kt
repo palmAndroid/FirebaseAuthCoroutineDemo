@@ -1,4 +1,4 @@
-package com.firebasecoroutinedemo.constants
+package com.loginsample.constants
 
 class ApplicationConstants {
     companion object {

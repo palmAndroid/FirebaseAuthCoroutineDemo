@@ -1,10 +1,10 @@
-package com.firebasecoroutinedemo
+package com.loginsample
 
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.firebasecoroutinedemo.constants.ApplicationConstants
-import com.firebasecoroutinedemo.preference.PreferenceStore
+import com.loginsample.constants.ApplicationConstants
+import com.loginsample.preference.PreferenceStore
 import kotlinx.android.synthetic.main.user_detail.*
 
 class UserDetailActivity : AppCompatActivity() {

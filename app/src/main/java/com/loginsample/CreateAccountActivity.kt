@@ -1,4 +1,4 @@
-package com.firebasecoroutinedemo
+package com.loginsample
 
 import android.content.Context
 import android.content.Intent
@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.firebasecoroutinedemo.constants.ApplicationConstants
-import com.firebasecoroutinedemo.entity.UserRequest
-import com.firebasecoroutinedemo.preference.PreferenceStore
-import com.firebasecoroutinedemo.viewmodel.CreateAccountViewModel
+import com.loginsample.constants.ApplicationConstants
+import com.loginsample.entity.UserRequest
+import com.loginsample.preference.PreferenceStore
+import com.loginsample.viewmodel.CreateAccountViewModel
 import com.google.firebase.FirebaseApp
 import kotlinx.android.synthetic.main.create_account.*
 
@@ -50,19 +50,15 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
         }else if (password != confirm_password){
             showToast("Password doesn't match with confirm password!")
         }else{
+            progressBar.visibility = View.VISIBLE
             viewModel.proceedWithAuthentication(this, UserRequest( email, password))
         }
         viewModel.userList.observe(this, Observer { it->
             if (it.isError){
-             showToast("Something went wrong , Please try again later!")
+                progressBar.visibility = View.GONE
+                it.errorMessage?.let { it1 -> showToast(it1) }
         }else{
-           /* var bundle = bundleOf("email" to it.email ,
-                "name" to it.name,
-                "uid" to it.uid)*/
-                var preferences = PreferenceStore(this as Context)
-                preferences.saveValue(ApplicationConstants.UID,it.uid)
-                preferences.saveValue(ApplicationConstants.USERNAME,it.name)
-                preferences.saveValue(ApplicationConstants.EMAIL,it.email)
+                progressBar.visibility = View.GONE
                 showToast("Your account has been created successfully!")
                 startActivity(Intent(this, MainActivity::class.java))
             }
